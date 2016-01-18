@@ -48,6 +48,13 @@ class TestTaxons < Minitest::Test
             assert_equal '^10', @taxons.with_id[0].name
             assert_equal 1, @taxons.with_id.size
           end
+
+          context 'when looking up by id' do
+            setup { @lookup = @taxons.find_id 1 }
+            should 'return the correct taxon' do
+              assert_equal '^10', @taxons.find_id(1)[0].name
+            end
+          end
         end
       end
 
@@ -59,7 +66,6 @@ class TestTaxons < Minitest::Test
         end
       end
 
-      context 'when looking up by id'
     end
 
   context 'when you look for an id'

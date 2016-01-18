@@ -32,6 +32,12 @@ class Taxons
     @taxonomies.each_value.flat_map(&:without_id)
   end
 
+  def find_id(id)
+    @taxonomies.each_value.flat_map {|taxon| taxon.find_id id }
+  end
+
+  #def all; @taxonomies.each_value.each; end
+
   class Taxon < Tree::TreeNode
     def initialize(name, content = { id: nil })
       super(name, content)
@@ -52,6 +58,10 @@ class Taxons
 
     def without_id
       reject(&:id).flatten
+    end
+
+    def find_id(id)
+      select {|taxon| taxon.id == id }.flatten
     end
 
     def id
