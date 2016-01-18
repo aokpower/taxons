@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rubytree'
 
 group :development do
+  gem 'rake'
   gem 'guard', require: false
   gem 'guard-minitest', require: false
 end
