@@ -50,11 +50,20 @@ class TestTaxons < Minitest::Test
           end
         end
       end
+
+      context 'when looking up by path' do
+        should 'return the right taxon' do
+          #p = @taxons['^00']['^10']
+          refute_nil fix
+          assert_equal fix, @taxons['^00/^10'.split('/')]
+        end
+      end
+
+      context 'when looking up by id'
     end
 
-  context 'when looking up by path'
-  context 'when looking up by id'
-  context 'when you add an id by path'
-  context 'when you add multiple ids by paths'
+  context 'when you look for an id'
+  context 'when you look for a name'
+  context 'when you add multiple ids'
   end
 end

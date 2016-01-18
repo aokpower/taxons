@@ -1,6 +1,8 @@
 require 'tree'
 
 class Taxons
+  # include Enumerable
+
   attr_reader :taxonomies
 
   def initialize(taxonomies = [])
@@ -10,15 +12,16 @@ class Taxons
 
   def add(taxon)
     fail "#{taxon} is not a Taxon!" unless taxon.is_a? Taxon
-    @taxonomies[taxon.name.to_sym] = taxon
+    @taxonomies[taxon.name] = taxon
   end
 
   def add_new(name, content = { id: nil })
     add(Taxon.new(name, content))
   end
 
-  def [](arg)
-    return @taxonomies[arg.to_sym] # unless arg.is_a? Array # for path accessing
+  def [](params)
+    return @taxonomies[params] unless params.is_a? Array # for path accessing
+    params.inject(self) {|store, key| store[key] }
   end
 
   def with_id
