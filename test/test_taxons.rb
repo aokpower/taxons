@@ -53,7 +53,7 @@ class TestTaxons < Minitest::Test
 
       context 'when looking up by path' do
         should 'return the right taxon' do
-          #p = @taxons['^00']['^10']
+          fix = @taxons['^00']['^10'] # comment this line to crash ruby
           refute_nil fix
           assert_equal fix, @taxons['^00/^10'.split('/')]
         end

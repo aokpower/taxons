@@ -47,11 +47,11 @@ class Taxons
     end
 
     def with_id
-      each.select(&:id).flatten
+      select(&:id).flatten
     end
 
     def without_id
-      each.reject(&:id).flatten
+      reject(&:id).flatten
     end
 
     def id
