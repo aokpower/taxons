@@ -45,6 +45,13 @@ class Taxons
     all.flat_map {|taxon| taxon.find_name name }.reject(&:nil?)
   end
 
+  def add_path(path_arr)
+    taxonomy = path_arr.shift
+    self[taxonomy].nil? ? taxonomy = add_new(taxonomy) : taxonomy = self[taxonomy]
+
+    taxonomy.add_path(path_arr)
+  end
+
   def all
     @taxonomies.each_value
   end
@@ -66,6 +73,12 @@ class Taxons
     def add_ids(id_map)
       id_map.map do |name, id|
         find_name(name).first.id = id
+      end
+    end
+
+    def add_path(path_arr)
+      path_arr.inject(self) do |parent, new| # new would be 'next', but that's reserved
+        parent[new].nil? ? parent.add_new(new) : parent[new]
       end
     end
 

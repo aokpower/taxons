@@ -21,6 +21,26 @@ class TestTaxons < Minitest::Test
       end
     end
 
+    context 'with 3 taxons' do
+      setup { @taxons.add_path ['top', 'second', 'third'] }
+
+      should 'have those taxons' do
+        assert_equal false, @taxons['top>second>third'.split('>')].nil?
+        assert_equal 3, @taxons.without_id.size
+      end
+
+      context 'and two more taxons' do
+        setup do
+          @taxons.add_path ['top', 'fourth']
+          @taxons.add_path ['top', 'second', 'third', 'fifth']
+        end
+
+        should 'have 5 taxons' do
+          assert_equal 5, @taxons.without_id.size
+        end
+      end
+    end
+
     context 'with 2 taxonomies, with taxons' do
       setup do
         @taxons.add_new('^00')
