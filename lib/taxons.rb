@@ -25,18 +25,20 @@ class Taxons
   end
 
   def with_id
-    @taxonomies.each_value.flat_map(&:with_id)
+    all.flat_map(&:with_id)
   end
 
   def without_id
-    @taxonomies.each_value.flat_map(&:without_id)
+    all.flat_map(&:without_id)
   end
 
   def find_id(id)
-    @taxonomies.each_value.flat_map {|taxon| taxon.find_id id }
+    all.flat_map {|taxon| taxon.find_id id }
   end
 
-  #def all; @taxonomies.each_value.each; end
+  def all
+    @taxonomies.each_value.each
+  end
 
   class Taxon < Tree::TreeNode
     def initialize(name, content = { id: nil })
