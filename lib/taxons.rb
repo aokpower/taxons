@@ -36,6 +36,10 @@ class Taxons
     all.flat_map {|taxon| taxon.find_id id }
   end
 
+  def find_name(name)
+    all.flat_map {|taxon| taxon.find_name name }
+  end
+
   def all
     @taxonomies.each_value.each
   end
@@ -52,6 +56,10 @@ class Taxons
 
     def add_new(name, content = { id: nil })
       add(self.class.new(name, content))
+    end
+
+    def find_name(name)
+      select {|taxon| taxon.name == name }.flatten
     end
 
     def with_id

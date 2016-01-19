@@ -29,31 +29,39 @@ class TestTaxons < Minitest::Test
         @taxons['^01'].add_new('^11')
       end
 
-      context 'when asking for taxons without ids' do
-        should 'return taxon(s,onomies) without an id' do
-          assert_equal 4, @taxons.without_id.size
-          @taxons.without_id.each do |taxon|
-            assert_kind_of Taxons::Taxon, taxon
+      context 'and no ids' do
+        context 'when looking for taxons without ids' do
+          should 'return taxon(s,onomies) without an id' do
+            assert_equal 4, @taxons.without_id.size
+            @taxons.without_id.each do |taxon|
+              assert_kind_of Taxons::Taxon, taxon
+            end
           end
         end
 
-        context 'and one has an id' do
-          setup { @taxons['^00']['^10'].id = 1 }
-
-          should 'have 3 without ids' do
-            assert_equal 3, @taxons.without_id.size
+        context 'when looking for taxons by name' do
+          should 'find the right taxon' do
+            assert_equal '^11', @taxons.find_name('^11')[0].name
           end
+        end
+      end
 
-          should 'have ^00/^10 with id' do
-            assert_equal '^10', @taxons.with_id[0].name
-            assert_equal 1, @taxons.with_id.size
-          end
+      context 'and one has an id' do
+        setup { @taxons['^00']['^10'].id = 1 }
 
-          context 'when looking up by id' do
-            setup { @lookup = @taxons.find_id 1 }
-            should 'return the correct taxon' do
-              assert_equal '^10', @taxons.find_id(1)[0].name
-            end
+        should 'have 3 without ids' do
+          assert_equal 3, @taxons.without_id.size
+        end
+
+        should 'have ^00/^10 with id' do
+          assert_equal '^10', @taxons.with_id[0].name
+          assert_equal 1, @taxons.with_id.size
+        end
+
+        context 'when looking up by id' do
+          setup { @lookup = @taxons.find_id 1 }
+          should 'return the correct taxon' do
+            assert_equal '^10', @taxons.find_id(1)[0].name
           end
         end
       end
@@ -68,8 +76,6 @@ class TestTaxons < Minitest::Test
 
     end
 
-  context 'when you look for an id'
-  context 'when you look for a name'
   context 'when you add multiple ids'
   end
 end
