@@ -31,11 +31,13 @@ class Taxons
   end
 
   def find_id(id)
-    all.flat_map {|taxon| taxon.find_id id }
+    all.flat_map {|taxon| taxon.find_id id }.reject(&:nil?)
   end
 
   def find_name(name)
-    all.flat_map {|taxon| taxon.find_name name }
+    # This is called #find_yield or #map_detect in facets/enumerables
+    # except that this isn't lazy, and returns an array instead of the first match
+    all.flat_map {|taxon| taxon.find_name name }.reject(&:nil?)
   end
 
   def all
@@ -57,7 +59,7 @@ class Taxons
     end
 
     def find_name(name)
-      select {|taxon| taxon.name == name }.flatten
+      find {|taxon| taxon.name == name }
     end
 
     def with_id
@@ -69,7 +71,7 @@ class Taxons
     end
 
     def find_id(id)
-      select {|taxon| taxon.id == id }.flatten
+      find {|taxon| taxon.id == id }
     end
 
     def id
