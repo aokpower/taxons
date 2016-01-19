@@ -44,6 +44,24 @@ class TestTaxons < Minitest::Test
             assert_equal '^11', @taxons.find_name('^11')[0].name
           end
         end
+
+        context 'when you add ids' do
+          context 'with names' do
+            setup { @taxons.add_ids({ '^11' => 1, '^01' => 2, '^00' => 3 }) }
+
+            should 'have the right number with ids' do
+              assert_equal 3, @taxons.with_id.size
+            end
+          end
+
+          context 'with paths' do
+            setup { @taxons.add_ids({ '^01/^11' => 1, '^00' => 2 }, '/') }
+
+            should 'have the right number with ids' do
+              assert_equal 2, @taxons.with_id.size
+            end
+          end
+        end
       end
 
       context 'and one has an id' do
@@ -73,9 +91,6 @@ class TestTaxons < Minitest::Test
           assert_equal fix, @taxons['^00/^10'.split('/')]
         end
       end
-
     end
-
-  context 'when you add multiple ids'
   end
 end

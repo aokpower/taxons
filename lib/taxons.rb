@@ -17,6 +17,11 @@ class Taxons
     add(Taxon.new(name, content))
   end
 
+  def add_ids(id_map, delimiter = nil)
+    return id_map.map {|name, id| find_name(name)[0].id = id } unless delimiter
+    id_map.map {|path, id| self[path.split(delimiter)].id = id }
+  end
+
   def [](params)
     return @taxonomies[params] unless params.is_a? Array # for path accessing
     params.inject(self) {|store, key| store[key] }
@@ -56,6 +61,12 @@ class Taxons
 
     def add_new(name, content = { id: nil })
       add(self.class.new(name, content))
+    end
+
+    def add_ids(id_map)
+      id_map.map do |name, id|
+        find_name(name).first.id = id
+      end
     end
 
     def find_name(name)
