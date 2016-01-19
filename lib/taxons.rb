@@ -1,8 +1,6 @@
 require 'tree'
 
 class Taxons
-  # include Enumerable
-
   attr_reader :taxonomies
 
   def initialize(taxonomies = [])
@@ -41,7 +39,7 @@ class Taxons
   end
 
   def all
-    @taxonomies.each_value.each
+    @taxonomies.each_value
   end
 
   class Taxon < Tree::TreeNode
