@@ -32,6 +32,16 @@ class TestTaxons < Minitest::Test
         assert_equal 3, @taxons.without_id.size
       end
 
+      context 'when trying to add the same taxons' do
+        should 'return it as if it were called with :[]' do
+          assert_equal @taxons[@path], @taxons.add_path(@path)
+        end
+
+        should 'have the same number of taxons' do
+          assert_equal 3, @taxons.without_id.size
+        end
+      end
+
       context 'and two more taxons' do
         setup do
           @taxons.add_path ['top', 'fourth']

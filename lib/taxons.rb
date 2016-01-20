@@ -23,8 +23,8 @@ class Taxons
   end
 
   def [](params)
-    return @taxonomies[params] unless params.is_a? Array # for path accessing
-    params.inject(self) {|store, key| store[key] }
+    return @taxonomies[params] unless params.is_a? Array
+    params.inject(@taxonomies) {|store, key| store[key] }
   end
 
   def with_id
@@ -46,7 +46,7 @@ class Taxons
   end
 
   def add_path(path_arr)
-    taxonomy = path_arr.shift
+    taxonomy, *path_arr = path_arr
     self[taxonomy].nil? ? taxonomy = add_new(taxonomy) : taxonomy = self[taxonomy]
 
     taxonomy.add_path(path_arr)
