@@ -1,5 +1,5 @@
 require 'test_helper'
-require_relative '../lib/taxons'
+require_relative '../lib/taxonomies'
 
 class TestTaxons < Minitest::Test
   context 'given a new Taxons object' do
