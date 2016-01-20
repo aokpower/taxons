@@ -1,9 +1,9 @@
 require 'test_helper'
 require_relative '../lib/taxonomies'
 
-class TestTaxons < Minitest::Test
-  context 'given a new Taxons object' do
-    setup { @taxons = Taxons.new }
+class TestTaxonomies < Minitest::Test
+  context 'given a new Taxonomies object' do
+    setup { @taxons = Taxonomies.new }
 
     context 'with a taxonomy' do
       setup { @taxons.add_new('ROOT1') }
@@ -67,7 +67,7 @@ class TestTaxons < Minitest::Test
           should 'return taxon(s,onomies) without an id' do
             assert_equal 4, @taxons.without_id.size
             @taxons.without_id.each do |taxon|
-              assert_kind_of Taxons::Taxon, taxon
+              assert_kind_of Taxonomies::Taxon, taxon
             end
           end
         end

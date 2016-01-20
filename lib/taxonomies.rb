@@ -1,6 +1,6 @@
 require 'tree'
 
-class Taxons
+class Taxonomies
   attr_reader :taxonomies
 
   def initialize(taxonomies = [])
