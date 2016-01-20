@@ -22,10 +22,13 @@ class TestTaxons < Minitest::Test
     end
 
     context 'with 3 taxons' do
-      setup { @taxons.add_path ['top', 'second', 'third'] }
+      setup do
+        @path = ['top', 'second', 'third']
+        @taxons.add_path(@path)
+      end
 
       should 'have those taxons' do
-        assert_equal false, @taxons['top>second>third'.split('>')].nil?
+        assert_equal 'third', @taxons[@path].name
         assert_equal 3, @taxons.without_id.size
       end
 
