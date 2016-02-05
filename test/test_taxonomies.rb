@@ -124,6 +124,13 @@ class TestTaxonomies < Minitest::Test
           assert_equal fix, @taxons['^00/^10'.split('/')]
         end
       end
+
+      context 'when looking up multiple paths' do
+        should 'return the correct taxons' do
+          fix = [@taxons['^00'], @taxons[['^00', '^10']]]
+          assert_equal fix, @taxons.values_at(['^00'], ['^00', '^10'])
+        end
+      end
     end
   end
 end

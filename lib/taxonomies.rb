@@ -27,6 +27,12 @@ class Taxonomies
     params.inject(@taxonomies) {|store, key| store[key] }
   end
 
+  def values_at(*paths)
+    # A convenience method for using #[] more than once.
+    #paths.map(&:[])
+    paths.map { |path| self[path] }
+  end
+
   def with_id
     all.flat_map(&:with_id)
   end
