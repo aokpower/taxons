@@ -25,7 +25,7 @@ GEM
       rb-inotify (>= 0.9)
     lumberjack (1.0.10)
     method_source (0.8.2)
-    minitest (5.8.3)
+    minitest (5.8.4)
     minitest-reporters (1.1.7)
       ansi
       builder
@@ -40,7 +40,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rb-fsevent (0.9.7)
-    rb-inotify (0.9.5)
+    rb-inotify (0.9.6)
       ffi (>= 0.5.0)
     ruby-progressbar (1.7.5)
     rubytree (0.9.7)
@@ -63,4 +63,4 @@ DEPENDENCIES
   shoulda-context
 
 BUNDLED WITH
-   1.11.1
+   1.11.2
