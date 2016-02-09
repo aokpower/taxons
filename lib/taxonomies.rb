@@ -53,8 +53,8 @@ class Taxonomies
 
   def add_path(path_arr)
     taxonomy, *path_arr = path_arr
-    self[taxonomy].nil? ? taxonomy = add_new(taxonomy) : taxonomy = self[taxonomy]
-
+    # Ensure taxonomy exists before calling Taxon#add_path
+    taxonomy = self[taxonomy].nil? ? add_new(taxonomy) : self[taxonomy]
     taxonomy.add_path(path_arr)
   end
 
