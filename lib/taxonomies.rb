@@ -83,7 +83,7 @@ class Taxonomies
     end
 
     def add_path(path_arr)
-      path_arr.inject(self) do |parent, new| # new would be 'next', but that's reserved
+      path_arr.inject(self) do |parent, new| # new would be 'next', but that's a keyword
         parent[new].nil? ? parent.add_new(new) : parent[new]
       end
     end
