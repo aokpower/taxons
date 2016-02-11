@@ -127,8 +127,25 @@ class TestTaxonomies < Minitest::Test
 
       context 'when looking up multiple paths' do
         should 'return the correct taxons' do
+          # TODO: if ['^00'] is nil?
           fix = [@taxons['^00'], @taxons[['^00', '^10']]]
           assert_equal fix, @taxons.values_at(['^00'], ['^00', '^10'])
+        end
+      end
+
+      context 'when importing from hash' do
+        setup do
+          @fix = {"id"=>1, "name"=>"^00", "pretty_name"=>"^00",
+            "permalink"=>"^00", "parent_id"=>nil, "taxonomy_id"=>1,
+            "taxons"=>[{"id"=>2, "name"=>"^01", "pretty_name"=>"^00 -> ^01",
+              "permalink"=>"^00/^01", "parent_id"=>1, "taxonomy_id"=>1}]}
+          @taxonomies.load(@fix)
+          end
+
+          should 'assign id\'s correctly' do
+            assert_equal 1, @taxonomies['^00'].id
+            assert_equal 2, @taxonomies[['^00', '^01']].id
+          end
         end
       end
     end
