@@ -4,10 +4,9 @@ gem 'rubytree'
 
 group :development do
   gem 'guard', require: false
-  gem 'guard-minitest', require: false
+  gem 'guard-rspec', require: false
 end
 
 group :testing do
-  gem 'shoulda-context'
-  gem 'minitest-reporters'
+  gem 'rspec'
 end
